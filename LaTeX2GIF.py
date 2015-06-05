@@ -8,16 +8,22 @@ from urllib.request import urlopen
 
 def main(argumentos):
 
-    if len(argumentos) < 3:
+    if len(argumentos) < 4:
         expresion = input("Introduce expresión LaTeX: ")
         nombre_archivo = input("Introduce nombre del archivo resultante: ")
+        extension = input("Introduce la extensión deseada (gif,png,pdf,swf,emf,svg): ")
     else:
         expresion = sys.argv[1]
         nombre_archivo = sys.argv[2]
+        extension = sys.argv[3]
+
+    if extension not in ("gif","png","pdf","swf","emf","svg"):
+        print("La extensión no está entre las soportadas, saliendo...")
+        sys.exit(-1)
 
     # Preparamos las cadenas de texto
-    servidor = "http://latex.codecogs.com/gif.download?"
-    nombre_archivo = nombre_archivo + ".gif"
+    servidor = "http://latex.codecogs.com/" + extension + ".download?"
+    nombre_archivo = nombre_archivo + "." + extension
 
     # Transformamos la expresión para quitar caracteres extraños en la URL
     expresion = quote(expresion)
