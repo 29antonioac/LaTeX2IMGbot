@@ -13,9 +13,9 @@ def main(argumentos):
         nombre_archivo = input("Introduce nombre del archivo resultante: ")
         extension = input("Introduce la extensión deseada (gif,png,pdf,swf,emf,svg): ")
     else:
-        expresion = sys.argv[1]
-        nombre_archivo = sys.argv[2]
-        extension = sys.argv[3]
+        expresion = argumentos[1]
+        nombre_archivo = argumentos[2]
+        extension = argumentos[3]
 
     if extension not in ("gif","png","pdf","swf","emf","svg"):
         print("La extensión no está entre las soportadas, saliendo...")
