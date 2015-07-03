@@ -24,10 +24,11 @@ def main(argumentos):
     # Preparamos las cadenas de texto
     servidor = "http://latex.codecogs.com/" + extension + ".download?"
     nombre_archivo = nombre_archivo + "." + extension
+    tamanio = "%5Cdpi%7B300%7D%20"
 
     # Transformamos la expresión para quitar caracteres extraños en la URL
     expresion = quote(expresion)
-    url = servidor + expresion
+    url = servidor + tamanio + expresion
     # print("Descargando desde",url)
 
     # Descarga el fichero desde url y lo guarda como nombre_archivo:
