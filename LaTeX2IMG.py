@@ -8,7 +8,7 @@ from PIL import Image
 from urllib.parse import quote
 from urllib.request import urlopen
 
-def png2webp(rutaImagen):
+def img2webp(rutaImagen):
     file, ext = os.path.splitext(rutaImagen)
     im = Image.open(rutaImagen).convert("RGBA")
     im.save(file + ".webp", "WEBP")
@@ -50,7 +50,7 @@ def main(argumentos):
         fichero_salida.write(datos)     # Se escribe en disco
 
     if webp:
-        png2webp(nombre_archivo_completo)
+        img2webp(nombre_archivo_completo)
         extension = "webp"
 
 
