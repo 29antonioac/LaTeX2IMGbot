@@ -3,27 +3,40 @@
 # LaTeX2GIF transforma usando un editor web una expresión LaTeX a un archivo GIF.
 
 import sys
+import os
+from PIL import Image
 from urllib.parse import quote
 from urllib.request import urlopen
 
+def png2webp(rutaImagen):
+    file, ext = os.path.splitext(rutaImagen)
+    im = Image.open(rutaImagen).convert("RGBA")
+    im.save(file + ".webp", "WEBP")
+    os.remove(rutaImagen)
+
 def main(argumentos):
+    webp = False
 
     if len(argumentos) < 4:
         expresion = input("Introduce expresión LaTeX: ")
         nombre_archivo = input("Introduce nombre del archivo resultante: ")
-        extension = input("Introduce la extensión deseada (gif,png,pdf,swf,emf,svg): ")
+        extension = input("Introduce la extensión deseada (gif,png,pdf,swf,emf,svg,webp): ")
     else:
         expresion = argumentos[1]
         nombre_archivo = argumentos[2]
         extension = argumentos[3]
 
-    if extension not in ("gif","png","pdf","swf","emf","svg"):
+    if extension not in ("gif","png","pdf","swf","emf","svg","webp"):
         print("La extensión no está entre las soportadas, saliendo...")
         sys.exit(-1)
 
+    if extension == "webp":
+        webp = True
+        extension = "png"
+
     # Preparamos las cadenas de texto
     servidor = "http://latex.codecogs.com/" + extension + ".download?"
-    nombre_archivo = nombre_archivo + "." + extension
+    nombre_archivo_completo = nombre_archivo + "." + extension
     tamanio = "%5Cdpi%7B300%7D%20"
 
     # Transformamos la expresión para quitar caracteres extraños en la URL
@@ -32,11 +45,16 @@ def main(argumentos):
     # print("Descargando desde",url)
 
     # Descarga el fichero desde url y lo guarda como nombre_archivo:
-    with urlopen(url) as respuesta, open(nombre_archivo, 'wb') as fichero_salida:
+    with urlopen(url) as respuesta, open(nombre_archivo_completo, 'wb') as fichero_salida:
         datos = respuesta.read()        # Un objeto "bytes"
         fichero_salida.write(datos)     # Se escribe en disco
 
-    print("Descargado como",nombre_archivo)
+    if webp:
+        png2webp(nombre_archivo_completo)
+        extension = "webp"
+
+
+    print("Descargado como",nombre_archivo + "." + extension)
 
 if __name__ == "__main__":
     main(sys.argv)
