@@ -5,3 +5,4 @@
 *.emf
 *.svg
 *.webp
+__pycache__
