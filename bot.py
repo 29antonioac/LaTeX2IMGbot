@@ -15,11 +15,13 @@ def listener(*messages):
         chatid = m.chat.id
         if m.content_type == 'text':
             text = m.text
-            if text[0] == "/":
-                text = text[1:]
+            if text[0:7] == "/latex ":
+                text = text[7:]
             elif text[0] == "@":
                 text = text[13:]
-                
+            else:
+                return
+
             LaTeX2IMG.main(['LaTeX2IMG',text,'resultado','webp'])
             photo = open('resultado.webp','rb')
             tb.send_document(chatid, photo)
