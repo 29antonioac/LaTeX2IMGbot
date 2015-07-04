@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import telebot
 import time
-import LaTeX2IMG
+from LaTeX2IMG import LaTeX2IMG
 from time import sleep
 
 TOKEN = '115128154:AAHySW69KRHCJ4v-OPpeJHQTXaDA4K58b4U'
