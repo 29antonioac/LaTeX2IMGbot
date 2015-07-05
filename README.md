@@ -30,4 +30,8 @@ Using pip
 3. Execute the bot in your server with ``` ./bot.py ```
 4. In the Telegram client you can talk with your bot or add them to groups. All messages beggining with **/latex** or @aliasofyourbot will be catched by your bot.
 
+## Examples
+
+![Examples from my mobile](Ejemplos.png)
+
 Enjoy it!
