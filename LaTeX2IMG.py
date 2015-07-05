@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # LaTeX2GIF transforma usando un editor web una expresión LaTeX a un archivo GIF.
 
