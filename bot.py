@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import telebot
 import time
 from LaTeX2IMG import LaTeX2IMG
