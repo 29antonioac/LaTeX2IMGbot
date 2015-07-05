@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 
-# LaTeX2GIF transforma usando un editor web una expresión LaTeX a un archivo GIF.
+# LaTeX2IMG transforma usando un editor web una expresión LaTeX a una imagen.
 
 import sys
 import os
-from PIL import Image
+from PIL import Image, ImageOps
 from urllib.parse import quote
 from urllib.request import urlopen
 
 def img2webp(rutaImagen):
     file, ext = os.path.splitext(rutaImagen)
     im = Image.open(rutaImagen).convert("RGBA")
+    im = ImageOps.expand(im,75)
     im.save(file + ".webp", "WEBP")
     os.remove(rutaImagen)
 
