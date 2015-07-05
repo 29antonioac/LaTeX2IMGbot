@@ -20,7 +20,7 @@ def listener(*messages):
             elif text[0] == "@":
                 text = text[13:]
             else:
-                return
+                break
 
             LaTeX2IMG.main(['LaTeX2IMG',text,'resultado','webp'])
             photo = open('resultado.webp','rb')
