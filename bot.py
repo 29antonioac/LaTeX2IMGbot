@@ -4,7 +4,7 @@ import time
 from LaTeX2IMG import LaTeX2IMG
 from time import sleep
 
-TOKEN = '115128154:AAHySW69KRHCJ4v-OPpeJHQTXaDA4K58b4U'
+TOKEN = ''
 
 
 def listener(*messages):
@@ -28,7 +28,8 @@ def listener(*messages):
             #tb.send_photo(chatid,photo)
             # tb.send_message(chatid, text)
 
-
+with open("token.txt","r") as file:
+    TOKEN = file.readline().strip()
 tb = telebot.TeleBot(TOKEN)
 tb.set_update_listener(listener) #register listener
 tb.polling()
