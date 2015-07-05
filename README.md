@@ -1,5 +1,5 @@
 # LaTeX2IMGbot
-Telegram Bot that receive an LaTeX equation and uses LaTeX2IMG to send an sticker.
+Telegram Bot that receive an LaTeX equation and uses LaTeX2IMG to send a sticker.
 
 This is developed with [pyTelegramBotAPI](https://github.com/eternnoir/pyTelegramBotAPI) using the listener mechanism. My bot is @LaTeX2IMGbot but you can create your own one =).
 
