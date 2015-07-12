@@ -3,7 +3,7 @@ import telebot
 import time
 from LaTeX2IMG import LaTeX2IMG
 from time import sleep
-from threading import Thread, current_thread
+from threading import current_thread
 
 TOKEN = ''
 
@@ -13,7 +13,6 @@ def listener(messages):
     When new messages arrive TeleBot will call this function.
     """
     for m in messages:
-        print(current_thread().getName())
         chatid = m.chat.id
         if m.content_type == 'text':
             text = m.text
@@ -27,8 +26,8 @@ def listener(messages):
             filename = 'resultado' + current_thread().name
 
             LaTeX2IMG.main(['LaTeX2IMG',text,filename,'webp'])
-            photo = open(filename + '.webp','rb')
-            tb.send_document(chatid, photo)
+            equation = open(filename + '.webp','rb')
+            tb.send_sticker(chatid, equation)
             #tb.send_photo(chatid,photo)
             # tb.send_message(chatid, text)
 
