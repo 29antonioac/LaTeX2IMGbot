@@ -23,6 +23,8 @@ def listener(messages):
             else:
                 break
 
+            tb.send_chat_action(chatid,'upload_document')
+
             filename = 'resultado' + current_thread().name
 
             LaTeX2IMG.main(['LaTeX2IMG',text,filename,'webp'])
