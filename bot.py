@@ -37,7 +37,7 @@ with open("token.txt","r") as file:
     TOKEN = file.readline().strip()
 tb = telebot.TeleBot(TOKEN)
 tb.set_update_listener(listener) #register listener
-tb.polling()
+tb.polling(True)
 
 while True: # Don't let the main Thread end.
     sleep(5)
