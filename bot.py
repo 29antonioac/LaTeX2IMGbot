@@ -28,10 +28,9 @@ def listener(messages):
             filename = 'resultado' + current_thread().name
 
             LaTeX2IMG.main(['LaTeX2IMG',text,filename,'webp'])
-            equation = open(filename + '.webp','rb')
-            tb.send_sticker(chatid, equation)
-            #tb.send_photo(chatid,photo)
-            # tb.send_message(chatid, text)
+
+            with open(filename + '.webp','rb') as equation:
+                tb.send_sticker(chatid, equation)
 
 with open("token.txt","r") as file:
     TOKEN = file.readline().strip()
