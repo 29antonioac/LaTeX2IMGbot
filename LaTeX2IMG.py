@@ -54,8 +54,9 @@ def main(argumentos):
         img2webp(nombre_archivo_completo)
         extension = "webp"
 
-
-    print("Descargado como",nombre_archivo + "." + extension)
+    # Si llamo a LaTeX2IMG como módulo, no imprimir nada
+    if __name__ == "__main__":
+        print("Descargado como",nombre_archivo + "." + extension)
 
 if __name__ == "__main__":
     main(sys.argv)
