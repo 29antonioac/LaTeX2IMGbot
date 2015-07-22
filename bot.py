@@ -40,7 +40,7 @@ with open("token.txt","r") as file:
 logger = telebot.logger
 formatter = logging.Formatter('[%(asctime)s] %(thread)d {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
                                   '%m-%d %H:%M:%S')
-ch = logging.StreamHandler(sys.stdout)
+ch = logging.FileHandler("log.txt")
 logger.addHandler(ch)
 logger.setLevel(logging.INFO)  # or use logging.INFO
 ch.setFormatter(formatter)
