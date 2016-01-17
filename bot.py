@@ -1,41 +1,56 @@
 #!/usr/bin/env python3
-import telebot
-import time
-import sys
-from LaTeX2IMG import LaTeX2IMG
-from time import sleep
+"""
+d
+"""
 from threading import current_thread
+from LaTeX2IMG.LaTeX2IMG import latex2img
+import telebot
 from telebot import logging
+from telebot import types
+
 
 TOKEN = ''
 
-
-def listener(messages):
-    """
-    When new messages arrive TeleBot will call this function.
-    """
-    for m in messages:
-        chatid = m.chat.id
-        if m.content_type == 'text':
-            text = m.text
-            if text[0:7] == "/latex ":
-                text = text[7:]
-            elif text[0] == "@":
-                text = text[13:]
-            else:
-                break
-
-            tb.send_chat_action(chatid,'upload_document')
-
-            filename = 'resultado' + current_thread().name
-
-            LaTeX2IMG.main(['LaTeX2IMG',text,filename,'webp'])
-
-            with open(filename + '.webp','rb') as equation:
-                tb.send_sticker(chatid, equation)
-
-with open("token.txt","r") as file:
+with open("token.txt", "r") as file:
     TOKEN = file.readline().strip()
+
+bot = telebot.TeleBot(TOKEN)
+
+def send_equation(chat_id, text):
+    bot.send_chat_action(chat_id, 'upload_document')
+
+    filename = 'resultado' + current_thread().name
+
+    latex2img(text, filename, 'webp')
+
+    with open(filename + '.webp', 'rb') as equation:
+        bot.send_sticker(chat_id, equation)
+
+def send_expression_callback(message):
+    chat_id = message.chat.id
+    text = message.text
+
+    send_equation(chat_id, text)
+
+@bot.message_handler(commands=['start', 'help'])
+def send_welcome(message):
+    bot.reply_to(message, "You can convert LaTeX expression using\n\n/latex expression")
+
+@bot.message_handler(commands=['latex'])
+def send_expression(message):
+    chat_id = message.chat.id
+    text = message.text[7:]
+
+    if text and text != "LaTeX2IMGbot":
+        send_equation(chat_id, text)
+    else:
+        # markup = types.ForceReply(selective=False)
+        # bot.send_message(chat_id, "Send me the LaTeX expression:", reply_to_message_id=message.message_id,
+        #             reply_markup=markup)
+        bot.reply_to(message, "Send me the LaTeX expression")
+        bot.register_next_step_handler(message, send_expression_callback)
+
+
 
 logger = telebot.logger
 formatter = logging.Formatter('[%(asctime)s] %(thread)d {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s',
@@ -45,9 +60,4 @@ logger.addHandler(ch)
 logger.setLevel(logging.INFO)  # or use logging.INFO
 ch.setFormatter(formatter)
 
-tb = telebot.TeleBot(TOKEN)
-tb.set_update_listener(listener) #register listener
-tb.polling(True)
-
-while True: # Don't let the main Thread end.
-    sleep(5)
+bot.polling()

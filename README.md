@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # LaTeX2IMGbot
 Telegram Bot that receive an LaTeX equation and uses LaTeX2IMG to send a sticker.
 
@@ -35,3 +36,12 @@ Using pip
 ![Examples from my mobile](Ejemplos.png)
 
 Enjoy it!
+=======
+# LaTeX2IMG
+Pequeño programa para pasar ecuación en LaTeX a imagen usando [codecogs](http://www.codecogs.com/latex/eqneditor.php)
+
+## Uso
+```
+./LaTeX2IMG <ecuación> <nombresalida> <extensionsalida>
+```
+>>>>>>> 98e3828a7b4235e92a7eba77c105385de3f2bc69

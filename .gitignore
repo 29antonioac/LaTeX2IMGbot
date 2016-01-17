@@ -1,5 +1,16 @@
+<<<<<<< HEAD
 ^(?!Ejemplos\.png$).*\.png
 *.webp
 token.txt
 nohup.out
 log.txt
+=======
+*.gif
+*.png
+*.pdf
+*.swf
+*.emf
+*.svg
+*.webp
+__pycache__
+>>>>>>> 98e3828a7b4235e92a7eba77c105385de3f2bc69
