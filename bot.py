@@ -44,11 +44,10 @@ def send_expression(message):
     if text and text != "LaTeX2IMGbot":
         send_equation(chat_id, text)
     else:
-        # markup = types.ForceReply(selective=False)
-        # bot.send_message(chat_id, "Send me the LaTeX expression:", reply_to_message_id=message.message_id,
-        #             reply_markup=markup)
-        bot.reply_to(message, "Send me the LaTeX expression")
-        bot.register_next_step_handler(message, send_expression_callback)
+        markup = types.ForceReply(selective=True)
+
+        new_msg = bot.reply_to(message, "Send me the LaTeX expression", reply_markup=markup)
+        bot.register_for_reply(new_msg, send_expression_callback)
 
 
 
