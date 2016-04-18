@@ -26,13 +26,17 @@ def send_equation(chat_id, text):
     with open(filename + '.webp', 'rb') as equation:
         bot.send_sticker(chat_id, equation)
 
-@bot.inline_handler(lambda query: query.query == 'text')
-def query_text(inline_query):
+@bot.inline_handler(lambda query: query.query is not None)
+def query_expression(inline_query):
     try:
-        print("INLINE")
-        r = types.InlineQueryResultArticle('1', 'Result', 'Result message.')
-        r2 = types.InlineQueryResultArticle('2', 'Result2', 'Result message2.')
-        bot.answer_inline_query(inline_query.id, [r, r2])
+        print("INLINE QUERY:", inline_query)
+        filename = 'resultado' + current_thread().name
+
+        latex2img(inline_query.query, filename, 'webp')
+        r = types.InlineQueryResultPhoto(inline_query.query,
+                                         'http://analca3.no-ip.org:5000/filename.webp',
+                                         'http://analca3.no-ip.org:5000/filename.webp')
+        bot.answer_inline_query(inline_query.id, [r], cache_time=1)
     except Exception as e:
         print(e)
 
