@@ -26,12 +26,6 @@ def send_equation(chat_id, text):
     with open(filename + '.webp', 'rb') as equation:
         bot.send_sticker(chat_id, equation)
 
-def send_expression_callback(message):
-    chat_id = message.chat.id
-    text = message.text
-
-    send_equation(chat_id, text)
-
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     bot.reply_to(message, "You can convert LaTeX expression using\n\n/latex expression")
@@ -44,10 +38,7 @@ def send_expression(message):
     if text and text != "LaTeX2IMGbot":
         send_equation(chat_id, text)
     else:
-        markup = types.ForceReply(selective=True)
-
-        new_msg = bot.reply_to(message, "Send me the LaTeX expression", reply_markup=markup)
-        bot.register_for_reply(new_msg, send_expression_callback)
+        new_msg = bot.reply_to(message, "Please send your expression with \"/latex expression\"")
 
 
 
