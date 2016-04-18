@@ -26,6 +26,16 @@ def send_equation(chat_id, text):
     with open(filename + '.webp', 'rb') as equation:
         bot.send_sticker(chat_id, equation)
 
+@bot.inline_handler(lambda query: query.query == 'text')
+def query_text(inline_query):
+    try:
+        print("INLINE")
+        r = types.InlineQueryResultArticle('1', 'Result', 'Result message.')
+        r2 = types.InlineQueryResultArticle('2', 'Result2', 'Result message2.')
+        bot.answer_inline_query(inline_query.id, [r, r2])
+    except Exception as e:
+        print(e)
+
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     bot.reply_to(message, "You can convert LaTeX expression using\n\n/latex expression")
