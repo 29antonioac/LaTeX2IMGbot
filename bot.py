@@ -32,10 +32,10 @@ def query_expression(inline_query):
         print("INLINE QUERY:", inline_query)
         filename = 'resultado' + current_thread().name
 
-        latex2img(inline_query.query, filename, 'webp')
+        latex2img(inline_query.query, filename, 'png')
         r = types.InlineQueryResultPhoto(inline_query.query,
-                                         'http://analca3.no-ip.org:5000/filename.webp',
-                                         'http://analca3.no-ip.org:5000/filename.webp')
+                                         'http://analca3.no-ip.org:5000/filename.png',
+                                         'http://analca3.no-ip.org:5000/filename.png')
         bot.answer_inline_query(inline_query.id, [r], cache_time=1)
     except Exception as e:
         print(e)
